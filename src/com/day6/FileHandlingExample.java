@@ -1,7 +1,8 @@
 package com.day6;
 import java.io.*;
 import java.util.Arrays;
-import java.util.Date; 
+import java.util.Date;
+import java.util.Scanner; 
 
 public class FileHandlingExample {
 	public static void main(String[] args) throws IOException {
@@ -14,8 +15,22 @@ public class FileHandlingExample {
 		}
 		
 		FileInputStream fis = new FileInputStream(file);
-		System.out.println(fis.read());
+		int asciiValue = fis.read();
+		while(asciiValue != -1)
+		{
+			System.out.print((char)fis.read());
+		}
+		fis.close();
 		
+		System.out.println("----------------------------------");
+		
+		Scanner scanner = new Scanner(file);
+		String text = new String();
+		while(scanner.hasNextLine()) {
+			text += scanner.next(); 
+			System.out.println(text);
+			System.out.println(scanner.next());
+		}
 		
 	}
 }
