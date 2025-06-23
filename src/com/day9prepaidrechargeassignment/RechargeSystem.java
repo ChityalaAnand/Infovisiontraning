@@ -11,7 +11,7 @@ public class RechargeSystem {
 
 		plans.add(new RechargePlan(1, "1GB/day for 28 days", 199));
 		plans.add(new RechargePlan(2, "1.5GB/day for 56 days", 399));
-		plans.add(new RechargePlan(3, "Unlimited Talktime - 28 days", 149));
+		plans.add(new RechargePlan(3, "Unlimited Talktime - 28 days", 549));
 
 		double walletBalance = 500.0;
 
