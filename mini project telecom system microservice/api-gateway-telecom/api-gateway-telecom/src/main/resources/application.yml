@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway-telecom
+
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: customer-service
+            uri: lb://CUSTOMER-SERVICE-TELECOM
+            predicates:
+              - Path=/api/customers/**
+          - id: plan-service
+            uri: lb://PLAN-SERVICE-TELECOM
+            predicates:
+              - Path=/api/plans/**
+          - id: recharge-service
+            uri: lb://RECHARGE-SERVICE-TELECOM
+            predicates:
+              - Path=/api/recharges/**
+      default-filters:
+        - AddRequestHeader=X-Gateway-Filter, Gateway-OK
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
