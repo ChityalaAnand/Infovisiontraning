@@ -1,0 +1,48 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: API-GATEWAY
+
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: user-service
+            uri: lb://USER-SERVICE
+            predicates:
+              - Path=/api/users/**
+
+          - id: plan-service
+            uri: lb://PLAN-SERVICE
+            predicates:
+              - Path=/api/plans/**
+
+          - id: usage-service
+            uri: lb://USAGE-SERVICE
+            predicates:
+              - Path=/api/usage/**
+
+          - id: billing-service
+            uri: lb://BILLING-SERVICE
+            predicates:
+              - Path=/api/billing/**
+
+          # Uncomment later when auth-service is ready
+          # - id: auth-service
+          #   uri: lb://AUTH-SERVICE
+          #   predicates:
+          #     - Path=/api/auth/**
+
+    discovery:
+      enabled: true
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
